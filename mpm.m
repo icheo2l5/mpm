@@ -247,7 +247,7 @@ function [pkg, opts] = setDefaultOpts()
 
     % to fix 'reference to non-existent field' issue
     opts.allpaths = false;
-       
+
 end
 
 function url = handleCustomUrl(url)
@@ -793,6 +793,7 @@ function [pkg, opts] = parseArgs(pkg, opts, action, varargin)
             opts.nopaths = true;
         elseif strcmpi(curArg, '--allpaths')
             pkg.add_all_dirs_to_path = true;
+            opts.allpaths = true;
         elseif strcmpi(curArg, '--local')
             opts.local_install = true;
             pkg.local_install = true;
@@ -927,9 +928,9 @@ function readRequirementsFile(fnm, opts)
             if opts.force
                 cmd = [cmd ' --force'];
             end
-            if opts.nopaths
-                cmd = [cmd ' --nopaths'];
-            end
+            % if opts.nopaths
+            %     cmd = [cmd ' --nopaths'];
+            % end
             if opts.allpaths
                 cmd = [cmd ' --allpaths'];
             end
