@@ -243,7 +243,11 @@ function [pkg, opts] = setDefaultOpts()
     opts.force = false;
     opts.debug = false;
     opts.nopaths = false;
-    opts.collection = pkg.collection;    
+    opts.collection = pkg.collection; 
+
+    % to fix 'reference to non-existent field' issue
+    opts.allpaths = false;
+       
 end
 
 function url = handleCustomUrl(url)
