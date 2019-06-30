@@ -434,11 +434,12 @@ function [pkg, isOk] = installPackage(pkg, opts)
             end
         else % no copy; just track the provided path
             % make sure we have absolute path
-            if ~isempty(strfind(pkg.url, pwd))
-                abspath = pkg.url;
-            else % try making it ourselves
-                abspath = fullfile(pwd, pkg.url);
-            end
+%             if ~isempty(strfind(pkg.url, pwd))
+%                 abspath = pkg.url;
+%             else % try making it ourselves
+%                 abspath = fullfile(pwd, pkg.url);
+%             end
+            abspath = pkg.url;
             if ~exist(abspath, 'dir')
                 warning(['Could not find directory: "' ...
                     abspath '." Try providing absolute path.']);
@@ -616,7 +617,10 @@ function opts = addToMetadata(pkg, opts)
     % write to file
     packages = pkgs;
     opts.metadata.packages = packages;
-    if ~opts.debug        
+    if ~opts.debug
+        if ~exist(opts.metafile, 'dir')
+            mkdir(fileparts(opts.metafile));
+        end       
         save(opts.metafile, 'packages');
     end
 end
