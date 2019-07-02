@@ -618,7 +618,7 @@ function opts = addToMetadata(pkg, opts)
     packages = pkgs;
     opts.metadata.packages = packages;
     if ~opts.debug
-        metafolder = fileparts(opts.metafile)
+        metafolder = fileparts(opts.metafile);
         if ~exist(metafolder, 'dir')
             mkdir(metafolder);
         end       
